@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd13dd11dc48eb41a1055406457cc6e, type: 3}
+  m_Name: LastWarrior
+  m_EditorClassIdentifier: 
+  cardType: {fileID: 11400000, guid: addbda79fb576d44f867ea9069309e1b, type: 2}
+  properties:
+  - stringValue: Last Warrior
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 3181401d3c2087849b0737ef0e6ee5dd, type: 2}
+  - stringValue: Double the value of attack for selected card if it has less than
+      25% of health.
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 109ea4047ba6a77479c7934ced3421b6, type: 2}
+  - stringValue: I will die only with my enemies!
+    intValue: 0
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 92b534f25e8657c4ea8f62dc9ab567e9, type: 2}
+  - stringValue: 
+    intValue: 0
+    sprite: {fileID: 21300000, guid: db1fbe30209799246a0a3ba3ffc8a8fd, type: 3}
+    element: {fileID: 11400000, guid: 83bcb9fcf5fc6c1448c54de7fbb95dd5, type: 2}
+  - stringValue: 
+    intValue: 4
+    sprite: {fileID: 0}
+    element: {fileID: 11400000, guid: 1ecfc374561eb164fa44ee5600f21159, type: 2}

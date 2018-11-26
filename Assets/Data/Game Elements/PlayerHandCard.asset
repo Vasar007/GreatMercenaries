@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737164a19e542ad46a87c15d0ec10e6d, type: 3}
+  m_Name: PlayerHandCard
+  m_EditorClassIdentifier: 
+  onCurrentCardSelected: {fileID: 11400000, guid: 49ce86ae0c4ba7a48afe2315d86e6e6b,
+    type: 2}
+  currentCard: {fileID: 11400000, guid: 6e3e27a46a641b249945502ac905ecdc, type: 2}
+  holdingCard: {fileID: 11400000, guid: e4b4b242d00a158469ebee88b1c38e66, type: 2}
