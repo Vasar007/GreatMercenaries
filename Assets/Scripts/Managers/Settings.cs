@@ -16,7 +16,7 @@ namespace GM
             // Loads resource manager from assets and return it.
             if (_resourcesManager == null)
             {
-                _resourcesManager = Resources.Load("ResourcesManager") as ResourcesManager;
+                _resourcesManager = Resources.Load("Resources Manager") as ResourcesManager;
                 _resourcesManager.Init();
             }
 
@@ -34,6 +34,12 @@ namespace GM
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
             return results;
+        }
+
+        public static void DropCreatureCard(Transform cardTransform, Transform parent, Card card)
+        {
+            SetParentForCard(cardTransform, parent);
+            gameManager.currentPlayer.UseResourceCards(card.cardCost);
         }
 
         public static void SetParentForCard(Transform cardTransform, Transform parent)

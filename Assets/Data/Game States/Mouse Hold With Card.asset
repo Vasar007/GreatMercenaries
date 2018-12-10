@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32b347678f48bee40acf7268c541f8da, type: 3}
-  m_Name: MouseHoldWithCard
+  m_Name: Mouse Hold With Card
   m_EditorClassIdentifier: 
   currentCard: {fileID: 11400000, guid: 6e3e27a46a641b249945502ac905ecdc, type: 2}
   playerCoontrolState: {fileID: 11400000, guid: bb2d705e3e5b1884eb0dfb9e136fbe20,

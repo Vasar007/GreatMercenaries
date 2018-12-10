@@ -3,7 +3,7 @@
 namespace GM.GameStates
 {
     // Implement mouse over detection action.
-    [CreateAssetMenu(menuName = "Actions/MouseOverDetection")]
+    [CreateAssetMenu(menuName = "Actions/Mouse Over Detection")]
     public class MouseOverDetection : Action
     {
         public override void Execute(float deltaTime)

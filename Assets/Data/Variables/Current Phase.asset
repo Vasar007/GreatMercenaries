@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab39a636d4f0663428eac4ac930687d7, type: 3}
-  m_Name: PhaseText
+  m_Script: {fileID: 11500000, guid: 7e68365682944434aa0a298083a26d89, type: 3}
+  m_Name: Current Phase
   m_EditorClassIdentifier: 
-  value: 
+  value: {fileID: 11400000, guid: 87f04df35259dce4fbb8c01c6ce13594, type: 2}

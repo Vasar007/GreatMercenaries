@@ -8,6 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5d985c973a87d47bde6f4345f7debe, type: 3}
-  m_Name: OnCurrentCardSelected
+  m_Script: {fileID: 11500000, guid: 0a03676a1bf0bca4c91b0c4199cdf1e0, type: 3}
+  m_Name: Player Control State
   m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 9e47326c783c8c74ea1a4b072138ac0c, type: 2}
+  - {fileID: 11400000, guid: 67fd15f7087364a4aa145339a80b13cf, type: 2}

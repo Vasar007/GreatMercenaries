@@ -3,7 +3,7 @@
 namespace GM.GameStates
 {
     // Implement mouse click action.
-    [CreateAssetMenu(menuName = "Actions/OnMouseClick")]
+    [CreateAssetMenu(menuName = "Actions/On Mouse Click")]
     public class OnMouseClick : Action
     {
         public override void Execute(float deltaTime)

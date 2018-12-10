@@ -4,7 +4,7 @@ using GM.GameElements;
 namespace GM.GameStates
 {
     // Implement state which descrbes mouse hold with card action.
-    [CreateAssetMenu(menuName = "Actions/MouseHoldWithCard")]
+    [CreateAssetMenu(menuName = "Actions/Mouse Hold With Card")]
     public class MouseHoldWithCard : Action
     {
         public CardVariable currentCard;

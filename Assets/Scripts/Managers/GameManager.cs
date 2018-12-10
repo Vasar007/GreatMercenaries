@@ -70,5 +70,10 @@ namespace GM
         {
             currentState = state;
         }
+
+        public void EndCurrentPhase()
+        {
+            turns[turnIndex].EndCurrentPhase();
+        }
     }
 }

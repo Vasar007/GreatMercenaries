@@ -9,9 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fd13dd11dc48eb41a1055406457cc6e, type: 3}
-  m_Name: LightLord
+  m_Name: Light Lord
   m_EditorClassIdentifier: 
   cardType: {fileID: 11400000, guid: cddb235fa3d421d4fa0e7236e24c4760, type: 2}
+  cardCost: 2
   properties:
   - stringValue: Light Lord
     intValue: 0
@@ -30,7 +31,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 9a63b09f64548ae45bc356cf56df5aa3, type: 3}
     element: {fileID: 11400000, guid: 83bcb9fcf5fc6c1448c54de7fbb95dd5, type: 2}
   - stringValue: 
-    intValue: 5
+    intValue: 2
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 1ecfc374561eb164fa44ee5600f21159, type: 2}
   - stringValue: 

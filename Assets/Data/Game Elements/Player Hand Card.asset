@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 737164a19e542ad46a87c15d0ec10e6d, type: 3}
-  m_Name: PlayerHandCard
+  m_Name: Player Hand Card
   m_EditorClassIdentifier: 
   onCurrentCardSelected: {fileID: 11400000, guid: 49ce86ae0c4ba7a48afe2315d86e6e6b,
     type: 2}

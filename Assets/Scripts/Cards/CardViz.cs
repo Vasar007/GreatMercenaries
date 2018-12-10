@@ -70,7 +70,7 @@ namespace GM
         public CardVizProperties GetProperties(Element element)
         {
             // Find first property with equal element and return it.
-            var result = properties.First(x => x.element == element);
+            var result = properties.First(property => property.element == element);
             return result;
         }
     }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0c894e931fdea8499b9ca822c40482a, type: 3}
-  m_Name: LocalPlayer
+  m_Name: Enemy Player
   m_EditorClassIdentifier: 
-  username: Player
+  username: Enemy
   startingCards:
   - LightLord
   - LastWarrior
@@ -20,5 +20,6 @@ MonoBehaviour:
   handGrid: {fileID: 11400000, guid: 1cd38baf5fb127c4295f4435d4b73edc, type: 2}
   resourcesGrid: {fileID: 11400000, guid: 6ca6c1da893bdb148b9e7934cd73d7e0, type: 2}
   downGrid: {fileID: 11400000, guid: f1aa074a38d31e74ab5266f9ad8df348, type: 2}
+  resourcesPerTurn: 1
   handLogic: {fileID: 11400000, guid: 8346e8f9c301ecf43b135b373feb23e8, type: 2}
   downLogic: {fileID: 11400000, guid: 0ea15f517de28a347be242343dfa7d6b, type: 2}
