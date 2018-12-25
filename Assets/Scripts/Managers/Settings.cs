@@ -11,6 +11,8 @@ namespace GM
         // Need to test on huge amount of data because it would be ineffective.
         private static ResourcesManager _resourcesManager;
 
+        private static ConsoleHook _consoleHook;
+
         public static ResourcesManager GetResourcesManager()
         {
             // Loads resource manager from assets and return it.
@@ -36,10 +38,12 @@ namespace GM
             return results;
         }
 
-        public static void DropCreatureCard(Transform cardTransform, Transform parent, Card card)
+        public static void DropCreatureCard(Transform cardTransform, Transform parent,
+                                            CardInstance cardInstance)
         {
             SetParentForCard(cardTransform, parent);
-            gameManager.currentPlayer.UseResourceCards(card.cardCost);
+            gameManager.currentPlayer.UseResourceCards(cardInstance.cardViz.card.cardCost);
+            gameManager.currentPlayer.DropCard(cardInstance);
         }
 
         public static void SetParentForCard(Transform cardTransform, Transform parent)
@@ -49,6 +53,17 @@ namespace GM
             cardTransform.localPosition = Vector3.zero;
             cardTransform.localEulerAngles = Vector3.zero;
             cardTransform.localScale = Vector3.one;
+        }
+
+        public static void RegisterEvent(string eventName, Color? color = null)
+        {
+            var choosenColor = color ?? Color.white;
+            if (_consoleHook == null)
+            {
+                _consoleHook = Resources.Load("Console Hook") as ConsoleHook;
+            }
+
+            _consoleHook.RegisterEvent(eventName, choosenColor);
         }
     }
 }

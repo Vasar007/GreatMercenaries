@@ -10,17 +10,20 @@ namespace GM
     public class PlayerHolder : ScriptableObject
     {
         public string username;
+        public Color playerColor;
         public string[] startingCards;
-        public SO.TransformVariable handGrid;
-        public SO.TransformVariable resourcesGrid;
-        public SO.TransformVariable downGrid;
 
         public int resourcesPerTurn = 1;
         [System.NonSerialized]
         public int resourcesDroppedThisTurn;
 
+        public bool isHumanPlayer;
+
         public GameElementLogic handLogic;
         public GameElementLogic downLogic;
+
+        [System.NonSerialized]
+        public CardHolder currentHolder;
 
         [System.NonSerialized]
         public List<CardInstance> handCards = new List<CardInstance>();
@@ -31,7 +34,10 @@ namespace GM
 
         public int ResourcesCunt
         {
-            get { return resourcesGrid.value.GetComponentsInChildren<CardViz>().Length; }
+            get
+            {
+                return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length;
+            }
         }
 
         public void AddResoourceCard(GameObject cardObject)
@@ -43,6 +49,8 @@ namespace GM
 
             resourcesList.Add(resourceHolder);
             ++resourcesDroppedThisTurn;
+
+            Settings.RegisterEvent(username + " drops resources card.");
         }
 
         public int NonUsedCards()
@@ -70,6 +78,19 @@ namespace GM
             }
 
             return result;
+        }
+
+        public void DropCard(CardInstance cardInstance)
+        {
+            if (handCards.Contains(cardInstance))
+            {
+                handCards.Remove(cardInstance);
+            }
+
+            cardsDown.Add(cardInstance);
+
+            Settings.RegisterEvent(username + " used " + cardInstance.cardViz.card.name + " for " +
+                                   cardInstance.cardViz.card.cardCost + " resources.");
         }
 
         public List<ResourceHolder> GetNonUsedResources()

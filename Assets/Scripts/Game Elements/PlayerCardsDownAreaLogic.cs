@@ -28,8 +28,12 @@ namespace GM
                     // Transfer card from hand to table.
                     Settings.DropCreatureCard(cardVariable.value.transform,
                                               areaGrid.value.transform,
-                                              card);
+                                              cardVariable.value);
                     cardVariable.value.currentLogic = cardDownLogic;
+                }
+                else
+                {
+                    Settings.RegisterEvent("Not enought resources to use card.", Color.red);
                 }
 
                 ///cardVariable.value.gameObject.SetActive(true); => Second activation.
@@ -48,6 +52,11 @@ namespace GM
                     Settings.gameManager.currentPlayer.AddResoourceCard(
                         cardVariable.value.gameObject
                     );
+                }
+                else
+                {
+                    Settings.RegisterEvent("Can't drop more than one resources card per turn.",
+                                           Color.red);
                 }
 
                 ///cardVariable.value.gameObject.SetActive(true); => Second activation.
