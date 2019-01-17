@@ -41,7 +41,15 @@ namespace GM
         public static void DropCreatureCard(Transform cardTransform, Transform parent,
                                             CardInstance cardInstance)
         {
+            cardInstance.isFlatfooted = true;
+            // Execute any special card abilities on drop.
+
             SetParentForCard(cardTransform, parent);
+            if (cardInstance.isFlatfooted)
+            {
+                cardTransform.localEulerAngles = new Vector3(0, 0, 90);
+            }
+
             gameManager.currentPlayer.UseResourceCards(cardInstance.cardViz.card.cardCost);
             gameManager.currentPlayer.DropCard(cardInstance);
         }

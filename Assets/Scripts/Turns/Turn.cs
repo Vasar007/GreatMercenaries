@@ -11,6 +11,7 @@ namespace GM
         public PlayerHolder player;
         public PhaseVariable currentPhase;
         public Phase[] phases;
+        public PlayerAction[] turnStartActions;
 
         public bool Execute()
         {
@@ -34,6 +35,16 @@ namespace GM
             }
 
             return result;
+        }
+
+        public void OnTurnStart()
+        {
+            if (turnStartActions == null) return;
+
+            foreach (var turnStartAction in turnStartActions)
+            {
+                turnStartAction.Execute(player);
+            }
         }
 
         public void EndCurrentPhase()

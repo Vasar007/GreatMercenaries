@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using GM.GameStates;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace GM
 {
@@ -10,7 +10,14 @@ namespace GM
         public override bool IsValid()
         {
             GameManager gameManager = GameManager.singleton;
-            if (gameManager.currentPlayer.cardsDown.Count > 0)
+            PlayerHolder playerHolder = gameManager.currentPlayer;
+
+            // Count all not flatfooted cards.
+            var count = playerHolder.cardsDown.Count(
+                cardInstance => !cardInstance.isFlatfooted
+            );
+
+            if (count > 0)
             {
                 return true;
             }

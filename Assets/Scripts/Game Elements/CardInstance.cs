@@ -7,6 +7,7 @@ namespace GM
     {
         public CardViz cardViz;
         public GameElements.GameElementLogic currentLogic;
+        public bool isFlatfooted;
 
         private void Start()
         {

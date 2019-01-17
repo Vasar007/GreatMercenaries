@@ -26,7 +26,7 @@ namespace GM
             {
                 forceExit = !isBattleValid.IsValid();
 
-                Settings.gameManager.SetState(forceExit ? null : battlePhaseControl);
+                Settings.gameManager.SetState(!forceExit ? battlePhaseControl : null);
                 Settings.gameManager.onPhaseChange.Raise();
                 isInit = true;
             }

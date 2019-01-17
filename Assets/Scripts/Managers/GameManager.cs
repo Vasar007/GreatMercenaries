@@ -6,6 +6,7 @@ namespace GM
     // Class for control of game states.
     public class GameManager : MonoBehaviour
     {
+        [System.NonSerialized]
         public PlayerHolder[] allPlayers;
         public PlayerHolder currentPlayer;
         public CardHolder playerOneHolder;
@@ -27,6 +28,13 @@ namespace GM
         private void Awake()
         {
             singleton = this;
+
+            allPlayers = new PlayerHolder[turns.Length];
+            for (int i = 0; i < allPlayers.Length; ++i)
+            {
+                allPlayers[i] = turns[i].player;
+            }
+            currentPlayer = turns[0].player;
         }
 
         private void Start()
@@ -49,7 +57,7 @@ namespace GM
                 playerTwoHolder.LoadPlayer(allPlayers[1]);
             }
 
-            var isComplete = turns[turnIndex].Execute();
+            bool isComplete = turns[turnIndex].Execute();
 
             if (isComplete)
             {
@@ -59,6 +67,9 @@ namespace GM
                     turnIndex = 0;
                 }
 
+                // The current player has changed here.
+                currentPlayer = turns[turnIndex].player;
+                turns[turnIndex].OnTurnStart();
                 turnText.value = turns[turnIndex].player.username + "'s Turn";
                 onTurnChange.Raise();
             }
@@ -72,7 +83,7 @@ namespace GM
 
         private void SetupPlayers()
         {
-            foreach(var playerHolder in allPlayers)
+            foreach (var playerHolder in allPlayers)
             {
                 if (playerHolder.isHumanPlayer)
                 {
