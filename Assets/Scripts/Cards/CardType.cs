@@ -6,6 +6,9 @@ namespace GM
     public abstract class CardType : ScriptableObject
     {
         public string typeName;
+        public bool canAttack;
+        // We can add some additional logic here:
+        ///public typelogic logic;
 
         public virtual void OnSetType(CardViz cardViz)
         {
@@ -13,6 +16,17 @@ namespace GM
             var typeElement = Settings.GetResourcesManager().typeElement;
             var type = cardViz.GetProperties(typeElement);
             type.text.text = typeName;
+        }
+
+        public bool TypeAllowsForAttack(CardInstance cardInstance)
+        {
+            // e.g. Flying type can attack even if flatfooted:
+            ///bool result = logic.Execute(cardInstance) -> if (cardInstance.isFlatfooted);
+            ///cardInstance.isFlatfooted = false;
+            ///return true;
+
+            if (canAttack) return true;
+            return false;
         }
     }
 }

@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -14,3 +15,4 @@ MonoBehaviour:
   handGrid: {fileID: 11400000, guid: 1cd38baf5fb127c4295f4435d4b73edc, type: 2}
   resourcesGrid: {fileID: 11400000, guid: 6ca6c1da893bdb148b9e7934cd73d7e0, type: 2}
   downGrid: {fileID: 11400000, guid: f1aa074a38d31e74ab5266f9ad8df348, type: 2}
+  battleLine: {fileID: 11400000, guid: fda4dd8056ea3f9449721766a20b44ee, type: 2}

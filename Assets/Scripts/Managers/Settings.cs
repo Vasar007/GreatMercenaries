@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace GM
 {
+    // Class which contains settings and common methods.
     public class Settings
     {
         public static GameManager gameManager;

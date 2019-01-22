@@ -27,5 +27,21 @@ namespace GM
 
             currentLogic.OnHighlight(this);
         }
+
+        public bool CanAttack()
+        {
+            bool result = true;
+            if (isFlatfooted)
+            {
+                result = false;
+            }
+
+            if (cardViz.card.cardType.TypeAllowsForAttack(this))
+            {
+                result = true;
+            }
+
+            return result;
+        }
     }
 }

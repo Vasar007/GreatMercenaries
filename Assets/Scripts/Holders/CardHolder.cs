@@ -9,6 +9,7 @@ namespace GM
         public SO.TransformVariable handGrid;
         public SO.TransformVariable resourcesGrid;
         public SO.TransformVariable downGrid;
+        public SO.TransformVariable battleLine;
 
         public void LoadPlayer(PlayerHolder playerHolder)
         {
@@ -23,6 +24,17 @@ namespace GM
             playerHolder.resourcesList.ForEach(resourceHolder =>
                 Settings.SetParentForCard(resourceHolder.cardObject.transform,
                                           resourcesGrid.value.transform));
+        }
+
+        public void SetCardOnBattleLine(CardInstance cardInstance)
+        {
+            var position = cardInstance.cardViz.gameObject.transform.position;
+
+            Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
+                                      battleLine.value.transform);
+            position.y = cardInstance.cardViz.gameObject.transform.position.y;
+            position.z = cardInstance.cardViz.gameObject.transform.position.z;
+            cardInstance.cardViz.gameObject.transform.position = position;
         }
     }
 }

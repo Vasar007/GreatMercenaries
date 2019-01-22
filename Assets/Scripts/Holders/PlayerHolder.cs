@@ -30,6 +30,8 @@ namespace GM
         [System.NonSerialized]
         public List<CardInstance> cardsDown = new List<CardInstance>();
         [System.NonSerialized]
+        public List<CardInstance> attackingCards = new List<CardInstance>();
+        [System.NonSerialized]
         public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
 
         public int ResourcesCunt
