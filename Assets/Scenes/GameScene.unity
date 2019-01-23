@@ -509,6 +509,9 @@ MonoBehaviour:
   onPhaseChange: {fileID: 11400000, guid: 344bdea7d67d31748bd95d603c030a7d, type: 2}
   turnText: {fileID: 11400000, guid: 6e50226a2d508614b88125f339fe81b3, type: 2}
   switchPlayer: 0
+  statsUIs:
+  - {fileID: 997397836}
+  - {fileID: 1950347417}
 --- !u!1 &40470027
 GameObject:
   m_ObjectHideFlags: 0
@@ -3336,6 +3339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 997397835}
+  - component: {fileID: 997397836}
   m_Layer: 5
   m_Name: Player Hero
   m_TagString: Untagged
@@ -3367,6 +3371,22 @@ RectTransform:
   m_AnchoredPosition: {x: -776, y: -305}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &997397836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997397834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d217b9030443e84580205a8caac8bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHolder: {fileID: 11400000, guid: c79be078552e0304cb64dedc99142aca, type: 2}
+  playerPortrait: {fileID: 1293621577}
+  health: {fileID: 1237662761}
+  username: {fileID: 1521600401}
 --- !u!1 &1000388260
 GameObject:
   m_ObjectHideFlags: 0
@@ -5720,6 +5740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1950347416}
+  - component: {fileID: 1950347417}
   m_Layer: 5
   m_Name: Enemy Hero
   m_TagString: Untagged
@@ -5751,6 +5772,22 @@ RectTransform:
   m_AnchoredPosition: {x: 776.61, y: 306}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1950347417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950347415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d217b9030443e84580205a8caac8bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHolder: {fileID: 11400000, guid: a8dea60a1b5c99c4a851b38ebe93789d, type: 2}
+  playerPortrait: {fileID: 1710457768}
+  health: {fileID: 2095310935}
+  username: {fileID: 384753276}
 --- !u!1 &1980159543
 GameObject:
   m_ObjectHideFlags: 0

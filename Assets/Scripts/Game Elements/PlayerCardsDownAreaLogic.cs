@@ -22,7 +22,10 @@ namespace GM
 
             if (card.cardType == creatureType)
             {
-                var canUse = Settings.gameManager.currentPlayer.CanUseCard(card);
+                // Fix event message if player cannot use enemy card
+                // (if try to steal card from enemy's hand) or try to play card on enemy battle
+                // without special abilities.
+                bool canUse = Settings.gameManager.currentPlayer.CanUseCard(cardVariable.value);
                 if (canUse)
                 {
                     // Transfer card from hand to table.
@@ -42,7 +45,7 @@ namespace GM
             }
             else if (card.cardType == resourceType)
             {
-                var canUse = Settings.gameManager.currentPlayer.CanUseCard(card);
+                bool canUse = Settings.gameManager.currentPlayer.CanUseCard(cardVariable.value);
                 if (canUse)
                 {
                     // Transfer card from hand to table.

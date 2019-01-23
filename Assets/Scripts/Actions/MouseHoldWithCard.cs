@@ -8,7 +8,7 @@ namespace GM.GameStates
     public class MouseHoldWithCard : Action
     {
         public CardVariable currentCard;
-        public State playerCoontrolState;
+        public State playerControlState;
         public SO.GameEvent onPlayerControlState;
 
         public override void Execute(float deltaTime)
@@ -32,7 +32,7 @@ namespace GM.GameStates
                 currentCard.value.gameObject.SetActive(true);
                 currentCard.Set(null);
 
-                Settings.gameManager.SetState(playerCoontrolState);
+                Settings.gameManager.SetState(playerControlState);
                 onPlayerControlState.Raise();
                 return;
             }

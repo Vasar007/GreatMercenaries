@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Enemy Player
   m_EditorClassIdentifier: 
   username: Enemy
+  portrait: {fileID: 21300000, guid: a0b85c461de8d114e9cea1dce45c3aed, type: 3}
   playerColor: {r: 0.6117647, g: 0.13725491, b: 0.07450981, a: 1}
+  health: 20
+  statsUI: {fileID: 0}
   startingCards:
   - LightLord
   - LastWarrior

@@ -22,6 +22,7 @@ namespace GM
         public SO.StringVariable turnText;
 
         public bool switchPlayer;
+        public PlayerStatsUI[] statsUIs;
 
         public static GameManager singleton;
 
@@ -53,8 +54,8 @@ namespace GM
             if (switchPlayer)
             {
                 switchPlayer = false;
-                playerOneHolder.LoadPlayer(allPlayers[0]);
-                playerTwoHolder.LoadPlayer(allPlayers[1]);
+                playerOneHolder.LoadPlayer(allPlayers[0], statsUIs[0]);
+                playerTwoHolder.LoadPlayer(allPlayers[1], statsUIs[1]);
             }
 
             bool isComplete = turns[turnIndex].Execute();
@@ -83,15 +84,21 @@ namespace GM
 
         private void SetupPlayers()
         {
-            foreach (var playerHolder in allPlayers)
+            for (int i = 0; i < allPlayers.Length; ++i)
             {
-                if (playerHolder.isHumanPlayer)
+                if (allPlayers[i].isHumanPlayer)
                 {
-                    playerHolder.currentHolder = playerOneHolder;
+                    allPlayers[i].currentHolder = playerOneHolder;
                 }
                 else
                 {
-                    playerHolder.currentHolder = playerTwoHolder;
+                    allPlayers[i].currentHolder = playerTwoHolder;
+                }
+
+                if (i < 2)
+                {
+                    allPlayers[i].statsUI = statsUIs[i];
+                    statsUIs[i].playerHolder.LoadPlayerOnStatsUI();
                 }
             }
         }

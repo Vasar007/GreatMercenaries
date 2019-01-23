@@ -11,7 +11,7 @@ namespace GM
         public SO.TransformVariable downGrid;
         public SO.TransformVariable battleLine;
 
-        public void LoadPlayer(PlayerHolder playerHolder)
+        public void LoadPlayer(PlayerHolder playerHolder, PlayerStatsUI playerStatsUI)
         {
             playerHolder.cardsDown.ForEach(cardInstance =>
                 Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
@@ -24,6 +24,9 @@ namespace GM
             playerHolder.resourcesList.ForEach(resourceHolder =>
                 Settings.SetParentForCard(resourceHolder.cardObject.transform,
                                           resourcesGrid.value.transform));
+
+            playerHolder.statsUI = playerStatsUI;
+            playerHolder.LoadPlayerOnStatsUI();
         }
 
         public void SetCardOnBattleLine(CardInstance cardInstance)

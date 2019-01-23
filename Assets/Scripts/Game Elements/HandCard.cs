@@ -12,6 +12,9 @@ namespace GM.GameElements
 
         public override void OnClick(CardInstance cardInstance)
         {
+            // Maybe further need to change this logic because card can interact with enemy's hand.
+            if (!Settings.gameManager.currentPlayer.handCards.Contains(cardInstance)) return;
+
             currentCard.Set(cardInstance);
             Settings.gameManager.SetState(holdingCard);
             onCurrentCardSelected.Raise();

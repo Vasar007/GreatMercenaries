@@ -10,7 +10,11 @@ namespace GM
     public class PlayerHolder : ScriptableObject
     {
         public string username;
+        public Sprite portrait;
         public Color playerColor;
+        public int health = 20;
+        public PlayerStatsUI statsUI;
+
         public string[] startingCards;
 
         public int resourcesPerTurn = 1;
@@ -62,9 +66,13 @@ namespace GM
             return result;
         }
 
-        public bool CanUseCard(Card card)
+        public bool CanUseCard(CardInstance cardInstance)
         {
-            var result = false;
+            // TODO: fix tries to play cards on enemies battle without special abilities.
+            if (!handCards.Contains(cardInstance) || !isHumanPlayer) return false;
+
+            bool result = false;
+            var card = cardInstance.cardViz.card;
 
             if (card.cardType is CreatureCard || card.cardType is SpellCard)
             {
@@ -78,7 +86,6 @@ namespace GM
                     result = true;
                 }
             }
-
             return result;
         }
 
@@ -126,6 +133,24 @@ namespace GM
             {
                 nonUsedResources[i].isUsed = true;
                 nonUsedResources[i].cardObject.transform.localEulerAngles = euler;
+            }
+        }
+
+        public void DoDamage(int value)
+        {
+            health -= value;
+            if (statsUI != null)
+            {
+                statsUI.UpdateHealth();
+            }
+        }
+
+        public void LoadPlayerOnStatsUI()
+        {
+            if (statsUI != null)
+            {
+                statsUI.playerHolder = this;
+                statsUI.UpdateAll();
             }
         }
     }
