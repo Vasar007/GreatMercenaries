@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using GM.GameStates;
 
 namespace GM
@@ -139,6 +140,12 @@ namespace GM
             turns[turnIndex].EndCurrentPhase();
 
             Settings.RegisterEvent(turns[turnIndex].name + " finished.", currentPlayer.playerColor);
+        }
+
+        public PlayerHolder GetEnemyOf(PlayerHolder playerHolder)
+        {
+            var index = Array.FindIndex(allPlayers, player => player != playerHolder);
+            return index != -1 ? allPlayers[index] : null;
         }
     }
 }

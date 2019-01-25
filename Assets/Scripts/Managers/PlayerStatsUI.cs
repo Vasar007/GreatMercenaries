@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace GM
 {
+    // Class which interact with GUI and show player's statistics.
     public class PlayerStatsUI : MonoBehaviour
     {
         public PlayerHolder playerHolder;

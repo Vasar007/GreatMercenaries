@@ -12,7 +12,10 @@ namespace GM
         public string username;
         public Sprite portrait;
         public Color playerColor;
-        public int health = 20;
+
+        [System.NonSerialized]
+        public int health = 20; // 20 - Debug constant. TODO: fix this later.
+
         public PlayerStatsUI statsUI;
 
         public string[] startingCards;
@@ -44,6 +47,11 @@ namespace GM
             {
                 return currentHolder.resourcesGrid.value.GetComponentsInChildren<CardViz>().Length;
             }
+        }
+
+        private void OnEnable()
+        {
+            health = 20; // 20 - Debug constant. TODO: fix this later.
         }
 
         public void AddResoourceCard(GameObject cardObject)

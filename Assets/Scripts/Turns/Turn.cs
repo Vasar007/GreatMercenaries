@@ -15,12 +15,12 @@ namespace GM
 
         public bool Execute()
         {
-            var result = false;
+            bool result = false;
 
             currentPhase.value = phases[index];
             phases[index].OnStartPhase();
 
-            var phaseIsComplete = phases[index].IsComplete();
+            bool phaseIsComplete = phases[index].IsComplete();
 
             if (phaseIsComplete)
             {

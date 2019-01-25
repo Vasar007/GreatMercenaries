@@ -11,8 +11,13 @@ namespace GM
         public SO.TransformVariable downGrid;
         public SO.TransformVariable battleLine;
 
+        [System.NonSerialized]
+        public PlayerHolder playerHolder;
+
         public void LoadPlayer(PlayerHolder playerHolder, PlayerStatsUI playerStatsUI)
         {
+            this.playerHolder = playerHolder;
+
             playerHolder.cardsDown.ForEach(cardInstance =>
                 Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
                                           downGrid.value.transform));
