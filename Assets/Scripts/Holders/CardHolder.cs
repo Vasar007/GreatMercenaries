@@ -44,5 +44,11 @@ namespace GM
             position.z = cardInstance.cardViz.gameObject.transform.position.z;
             cardInstance.cardViz.gameObject.transform.position = position;
         }
+
+        public void SetCardDown(CardInstance cardInstance)
+        {
+            Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
+                                      downGrid.value.transform);
+        }
     }
 }

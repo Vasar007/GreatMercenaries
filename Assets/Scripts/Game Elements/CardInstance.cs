@@ -43,5 +43,18 @@ namespace GM
 
             return result;
         }
+
+        public void SetFlatfooted(bool isFlatfooted)
+        {
+            this.isFlatfooted = isFlatfooted;
+            if (isFlatfooted)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, 90);
+            }
+            else
+            {
+                transform.localEulerAngles = Vector3.zero;
+            }
+        }
     }
 }

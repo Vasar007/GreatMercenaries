@@ -16,20 +16,11 @@ namespace GM
                 forceExit = false;
                 return true;
             }
-            return false;
-        }
 
-
-        public override void OnStartPhase()
-        {
             var playerHolder = Settings.gameManager.currentPlayer;
             var enemyHolder = Settings.gameManager.GetEnemyOf(playerHolder);
 
-            if (playerHolder.attackingCards.Count == 0)
-            {
-                forceExit = true;
-                return;
-            }
+            if (playerHolder.attackingCards.Count == 0) return true;
 
             // If there are more than 2 players we should specify move order in attack.
             foreach (var attackingCard in playerHolder.attackingCards)
@@ -42,17 +33,25 @@ namespace GM
                     Debug.LogError("You are attacking with a card that can't attack!");
                     continue;
                 }
+                playerHolder.DropCard(attackingCard, false);
+                playerHolder.currentHolder.SetCardDown(attackingCard);
+                attackingCard.SetFlatfooted(true);
 
                 enemyHolder.DoDamage(attackProperty.intValue);
             }
 
-            // Work done, exit the phase.
-            forceExit = true;
+            return true;
+        }
+
+
+        public override void OnStartPhase()
+        {
+
         }
 
         public override void OnEndPhase()
         {
-            // Changes later.
+
         }
     }
 }

@@ -12,8 +12,7 @@ namespace GM
             {
                 if (cardInstance.isFlatfooted)
                 {
-                    cardInstance.cardViz.transform.localEulerAngles = Vector3.zero;
-                    cardInstance.isFlatfooted = false;
+                    cardInstance.SetFlatfooted(false);
                 }
             }
         }

@@ -97,7 +97,7 @@ namespace GM
             return result;
         }
 
-        public void DropCard(CardInstance cardInstance)
+        public void DropCard(CardInstance cardInstance, bool registerEvent = true)
         {
             if (handCards.Contains(cardInstance))
             {
@@ -105,9 +105,13 @@ namespace GM
             }
 
             cardsDown.Add(cardInstance);
-
-            Settings.RegisterEvent(username + " used " + cardInstance.cardViz.card.name + " for " +
-                                   cardInstance.cardViz.card.cardCost + " resources.");
+            
+            if (registerEvent)
+            {
+                Settings.RegisterEvent(username + " used " + cardInstance.cardViz.card.name +
+                                       " for " + cardInstance.cardViz.card.cardCost +
+                                       " resources.");
+            }
         }
 
         public List<ResourceHolder> GetNonUsedResources()
