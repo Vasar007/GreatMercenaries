@@ -87,7 +87,17 @@ namespace GM
         {
             for (int i = 0; i < allPlayers.Length; ++i)
             {
-                if (allPlayers[i].isHumanPlayer)
+                //if (allPlayers[i].isHumanPlayer)
+                //{
+                //    allPlayers[i].currentHolder = playerOneHolder;
+                //}
+                //else
+                //{
+                //    allPlayers[i].currentHolder = playerTwoHolder;
+                //}
+
+                // If we have more than 2 players, need to rework this statement.
+                if (i == 0)
                 {
                     allPlayers[i].currentHolder = playerOneHolder;
                 }
@@ -124,6 +134,7 @@ namespace GM
                                               playerHolder.currentHolder.handGrid.value);
                     playerHolder.handCards.Add(cardInstance);
                 }
+                playerHolder.currentHolder.LoadPlayer(playerHolder, playerHolder.statsUI);
 
                 Settings.RegisterEvent("Created cards for player " + playerHolder.username + ".",
                                        playerHolder.playerColor);
@@ -146,6 +157,22 @@ namespace GM
         {
             var index = Array.FindIndex(allPlayers, player => player != playerHolder);
             return index != -1 ? allPlayers[index] : null;
+        }
+
+        public void LoadPlayerOnHolder(PlayerHolder playerHolder, CardHolder cardHolder,
+                                       PlayerStatsUI playerStatsUI)
+        {
+            cardHolder.LoadPlayer(playerHolder, playerStatsUI);
+        }
+
+        public void LoadPlayerOnActive(PlayerHolder playerHolder)
+        {
+            if (playerOneHolder.playerHolder != playerHolder)
+            {
+                var previousPlayer = playerOneHolder.playerHolder;
+                LoadPlayerOnHolder(previousPlayer, playerTwoHolder, statsUIs[1]);
+                LoadPlayerOnHolder(playerHolder, playerOneHolder, statsUIs[0]);
+            }
         }
     }
 }

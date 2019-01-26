@@ -46,12 +46,10 @@ namespace GM
 
         public override void OnStartPhase()
         {
-
         }
 
         public override void OnEndPhase()
         {
-
         }
     }
 }

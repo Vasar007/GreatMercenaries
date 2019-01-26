@@ -16,6 +16,8 @@ namespace GM
 
         public void LoadPlayer(PlayerHolder playerHolder, PlayerStatsUI playerStatsUI)
         {
+            if (playerHolder == null) return;
+
             this.playerHolder = playerHolder;
 
             playerHolder.cardsDown.ForEach(cardInstance =>
@@ -23,8 +25,13 @@ namespace GM
                                           downGrid.value.transform));
 
             playerHolder.handCards.ForEach(cardInstance =>
-                Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
-                                          handGrid.value.transform));
+            {
+                if (cardInstance.cardViz != null)
+                {
+                    Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
+                                              handGrid.value.transform);
+                }
+            });
 
             playerHolder.resourcesList.ForEach(resourceHolder =>
                 Settings.SetParentForCard(resourceHolder.cardObject.transform,
