@@ -18,7 +18,10 @@ namespace GM
 
         public PlayerStatsUI statsUI;
 
-        public string[] startingCards;
+        public List<string> startingDeck = new List<string>();
+
+        [System.NonSerialized]
+        public List<string> allCards = new List<string>();
 
         public int resourcesPerTurn = 1;
         [System.NonSerialized]
@@ -49,9 +52,10 @@ namespace GM
             }
         }
 
-        private void OnEnable()
+        public void Init()
         {
             health = 20; // 20 - Debug constant. TODO: fix this later.
+            allCards.AddRange(startingDeck);
         }
 
         public void AddResoourceCard(GameObject cardObject)

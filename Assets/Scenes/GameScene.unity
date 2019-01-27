@@ -504,7 +504,7 @@ MonoBehaviour:
   turnIndex: 0
   turns:
   - {fileID: 11400000, guid: 5aeb58d98d16e0449bff5e4f2bc45535, type: 2}
-  - {fileID: 11400000, guid: 06eb98912c2504645890cf5045af7cae, type: 2}
+  - {fileID: 11400000, guid: a96ee44c855b9ff4d9d265baf981cdc5, type: 2}
   onTurnChange: {fileID: 11400000, guid: 6de1bd100ef29c84085fe79ad89d435b, type: 2}
   onPhaseChange: {fileID: 11400000, guid: 344bdea7d67d31748bd95d603c030a7d, type: 2}
   turnText: {fileID: 11400000, guid: 6e50226a2d508614b88125f339fe81b3, type: 2}

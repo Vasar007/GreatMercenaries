@@ -12,19 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c894e931fdea8499b9ca822c40482a, type: 3}
   m_Name: Local Player
   m_EditorClassIdentifier: 
-  username: Player
+  username: Player 1
   portrait: {fileID: 21300000, guid: a0b85c461de8d114e9cea1dce45c3aed, type: 3}
   playerColor: {r: 0.011764707, g: 0.36862746, b: 0.6117647, a: 1}
-  health: 20
   statsUI: {fileID: 0}
-  startingCards:
+  startingDeck:
   - Light Lord
+  - Reinforcement
+  - Light Lord
+  - Reinforcement
   - Last Warrior
-  - Light Lord
-  - Reinforcement
-  - Reinforcement
-  - Reinforcement
-  - Reinforcement
   resourcesPerTurn: 1
   isHumanPlayer: 1
   handLogic: {fileID: 11400000, guid: 8346e8f9c301ecf43b135b373feb23e8, type: 2}

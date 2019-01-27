@@ -22,7 +22,6 @@ namespace GM
         public SO.GameEvent onPhaseChange;
         public SO.StringVariable turnText;
 
-        public bool switchPlayer;
         public PlayerStatsUI[] statsUIs;
 
         public static GameManager singleton;
@@ -44,23 +43,15 @@ namespace GM
             Settings.gameManager = this;
 
             SetupPlayers();
-            CreateStartingCards();
 
+            turns[0].OnTurnStart();
             turnText.value = turns[turnIndex].player.username + "'s Turn";
             onTurnChange.Raise();
         }
 
         private void Update()
         {
-            if (switchPlayer)
-            {
-                switchPlayer = false;
-                playerOneHolder.LoadPlayer(allPlayers[0], statsUIs[0]);
-                playerTwoHolder.LoadPlayer(allPlayers[1], statsUIs[1]);
-            }
-
             bool isComplete = turns[turnIndex].Execute();
-
             if (isComplete)
             {
                 ++turnIndex;
@@ -87,14 +78,7 @@ namespace GM
         {
             for (int i = 0; i < allPlayers.Length; ++i)
             {
-                //if (allPlayers[i].isHumanPlayer)
-                //{
-                //    allPlayers[i].currentHolder = playerOneHolder;
-                //}
-                //else
-                //{
-                //    allPlayers[i].currentHolder = playerTwoHolder;
-                //}
+                allPlayers[i].Init();
 
                 // If we have more than 2 players, need to rework this statement.
                 if (i == 0)
@@ -105,39 +89,8 @@ namespace GM
                 {
                     allPlayers[i].currentHolder = playerTwoHolder;
                 }
-
-                if (i < 2)
-                {
-                    allPlayers[i].statsUI = statsUIs[i];
-                    statsUIs[i].playerHolder.LoadPlayerOnStatsUI();
-                }
-            }
-        }
-
-        private void CreateStartingCards()
-        {
-            ResourcesManager resourcesManager = Settings.GetResourcesManager();
-
-            foreach (var playerHolder in allPlayers)
-            { 
-                foreach (var card in playerHolder.startingCards)
-                {
-                    var gameObject = Instantiate(cardPrefab); // as GameObject
-
-                    var cardViz = gameObject.GetComponent<CardViz>();
-                    cardViz.LoadCard(resourcesManager.GetCardInstance(card));
-
-                    var cardInstance = gameObject.GetComponent<CardInstance>();
-                    cardInstance.currentLogic = playerHolder.handLogic;
-
-                    Settings.SetParentForCard(gameObject.transform,
-                                              playerHolder.currentHolder.handGrid.value);
-                    playerHolder.handCards.Add(cardInstance);
-                }
-                playerHolder.currentHolder.LoadPlayer(playerHolder, playerHolder.statsUI);
-
-                Settings.RegisterEvent("Created cards for player " + playerHolder.username + ".",
-                                       playerHolder.playerColor);
+                allPlayers[i].statsUI = statsUIs[i];
+                allPlayers[i].currentHolder.LoadPlayer(allPlayers[i], allPlayers[i].statsUI);
             }
         }
 
@@ -167,12 +120,34 @@ namespace GM
 
         public void LoadPlayerOnActive(PlayerHolder playerHolder)
         {
-            if (playerOneHolder.playerHolder != playerHolder)
+            var previousPlayer = playerOneHolder.playerHolder;
+            LoadPlayerOnHolder(previousPlayer, playerTwoHolder, statsUIs[1]);
+            LoadPlayerOnHolder(playerHolder, playerOneHolder, statsUIs[0]);
+        }
+
+        public void PickNewCardFromDeck(PlayerHolder playerHolder)
+        {
+            if (playerHolder.allCards.Count == 0)
             {
-                var previousPlayer = playerOneHolder.playerHolder;
-                LoadPlayerOnHolder(previousPlayer, playerTwoHolder, statsUIs[1]);
-                LoadPlayerOnHolder(playerHolder, playerOneHolder, statsUIs[0]);
+                Debug.Log("Game Over!");
+                return;
             }
+
+            var cardId = playerHolder.allCards[0];
+            playerHolder.allCards.RemoveAt(0);
+
+            var resourcesManager = Settings.GetResourcesManager();
+            var gameObject = Instantiate(cardPrefab); // as GameObject
+
+            var cardViz = gameObject.GetComponent<CardViz>();
+            cardViz.LoadCard(resourcesManager.GetCardInstance(cardId));
+
+            var cardInstance = gameObject.GetComponent<CardInstance>();
+            cardInstance.currentLogic = playerHolder.handLogic;
+
+            Settings.SetParentForCard(gameObject.transform,
+                                      playerHolder.currentHolder.handGrid.value);
+            playerHolder.handCards.Add(cardInstance);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace GM
             if (playerHolder == null) return;
 
             this.playerHolder = playerHolder;
+            playerHolder.currentHolder = this;
 
             playerHolder.cardsDown.ForEach(cardInstance =>
                 Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
