@@ -17,10 +17,15 @@ MonoBehaviour:
   playerColor: {r: 0.011764707, g: 0.36862746, b: 0.6117647, a: 1}
   statsUI: {fileID: 0}
   startingDeck:
-  - Light Lord
+  - Reinforcement
   - Reinforcement
   - Light Lord
   - Reinforcement
+  - Light Lord
+  - Reinforcement
+  - Light Lord
+  - Last Warrior
+  - Light Lord
   - Last Warrior
   resourcesPerTurn: 1
   isHumanPlayer: 1

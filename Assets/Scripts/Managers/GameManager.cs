@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using GM.GameStates;
 
@@ -9,6 +10,7 @@ namespace GM
     {
         [System.NonSerialized]
         public PlayerHolder[] allPlayers;
+
         public PlayerHolder currentPlayer;
         public CardHolder playerOneHolder;
         public CardHolder playerTwoHolder;
@@ -23,6 +25,9 @@ namespace GM
         public SO.StringVariable turnText;
 
         public PlayerStatsUI[] statsUIs;
+
+        private Dictionary<CardInstance, BlockInstance> _blockInstances =
+            new Dictionary<CardInstance, BlockInstance>();
 
         public static GameManager singleton;
 
@@ -94,6 +99,13 @@ namespace GM
             }
         }
 
+        private BlockInstance GetBlockInstanceOfAttacker(CardInstance cardAttacker)
+        {
+            BlockInstance result = null;
+            _blockInstances.TryGetValue(cardAttacker, out result);
+            return result;
+        }
+
         public void SetState(State state)
         {
             currentState = state;
@@ -143,11 +155,40 @@ namespace GM
             cardViz.LoadCard(resourcesManager.GetCardInstance(cardId));
 
             var cardInstance = gameObject.GetComponent<CardInstance>();
+            cardInstance.playerOwner = playerHolder;
             cardInstance.currentLogic = playerHolder.handLogic;
 
             Settings.SetParentForCard(gameObject.transform,
                                       playerHolder.currentHolder.handGrid.value);
             playerHolder.handCards.Add(cardInstance);
+        }
+
+        public void AddBlockInstance(CardInstance cardAttacker, CardInstance cardBlocker)
+        {
+            var blockInstance = GetBlockInstanceOfAttacker(cardAttacker);
+            if (blockInstance == null)
+            {
+                blockInstance = new BlockInstance
+                {
+                    cardAttacker = cardAttacker
+                };
+                _blockInstances.Add(cardAttacker, blockInstance);
+            }
+
+            if (blockInstance.cardBlockers.Contains(cardBlocker))
+            {
+                blockInstance.cardBlockers.Add(cardBlocker);
+            }
+        }
+
+        public Dictionary<CardInstance, BlockInstance> GetBlockInstances()
+        {
+            return _blockInstances;
+        }
+
+        public void ClearBlockInstances()
+        {
+            _blockInstances.Clear();
         }
     }
 }

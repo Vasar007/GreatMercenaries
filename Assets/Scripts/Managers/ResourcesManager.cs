@@ -29,10 +29,10 @@ namespace GM
 
         public Card GetCardInstance(string id)
         {
-            Card originalCard = GetCard(id);
+            var originalCard = GetCard(id);
             if (originalCard == null) return null;
 
-            Card newInstance = Instantiate(originalCard);
+            var newInstance = Instantiate(originalCard);
             newInstance.name = originalCard.name;
             return newInstance;
         }

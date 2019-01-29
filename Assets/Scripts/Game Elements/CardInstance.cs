@@ -5,6 +5,7 @@ namespace GM
     // Context implementator from strategy pattern (or Client). Need to use for actions.
     public class CardInstance : MonoBehaviour, IClickable
     {
+        public PlayerHolder playerOwner;
         public CardViz cardViz;
         public GameElements.GameElementLogic currentLogic;
         public bool isFlatfooted;
@@ -55,6 +56,32 @@ namespace GM
             {
                 transform.localEulerAngles = Vector3.zero;
             }
+        }
+
+        public bool CanBeBlocked(CardInstance cardBlocker)
+        {
+            bool result = false;
+            if (cardViz.card.cardType.canAttack)
+            {
+                result = true;
+
+                // We can add additional logic when card is attempted to block.
+
+                if (result)
+                { 
+                    Settings.gameManager.AddBlockInstance(this, cardBlocker);
+                }
+                return result;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void CardInstanceToGraveyard()
+        {
+            Debug.Log("Card to graveyard.");
         }
     }
 }
