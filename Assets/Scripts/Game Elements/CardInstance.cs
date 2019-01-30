@@ -58,10 +58,10 @@ namespace GM
             }
         }
 
-        public bool CanBeBlocked(CardInstance cardBlocker)
+        public bool CanBeBlocked(CardInstance cardBlocker, ref int count)
         {
-            bool result = false;
-            if (cardViz.card.cardType.canAttack)
+            bool result = playerOwner.attackingCards.Contains(this);
+            if (result && cardViz.card.cardType.canAttack)
             {
                 result = true;
 
@@ -69,7 +69,7 @@ namespace GM
 
                 if (result)
                 { 
-                    Settings.gameManager.AddBlockInstance(this, cardBlocker);
+                    Settings.gameManager.AddBlockInstance(this, cardBlocker, ref count);
                 }
                 return result;
             }

@@ -38,6 +38,8 @@ namespace GM
                 Settings.SetParentForCard(resourceHolder.cardObject.transform,
                                           resourcesGrid.value.transform));
 
+            playerHolder.attackingCards.ForEach(cardInstance => SetCardOnBattleLine(cardInstance));
+
             playerHolder.statsUI = playerStatsUI;
             playerHolder.LoadPlayerOnStatsUI();
         }

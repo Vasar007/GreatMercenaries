@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCard: {fileID: 11400000, guid: 6e3e27a46a641b249945502ac905ecdc, type: 2}
   playerControlState: {fileID: 11400000, guid: bb2d705e3e5b1884eb0dfb9e136fbe20, type: 2}
+  playerBlockState: {fileID: 11400000, guid: fb5f3ef5852278e4b8e3a11592d40339, type: 2}
   onPlayerControlState: {fileID: 11400000, guid: e998d60681940db4ea5664cd20ce4768,
     type: 2}
+  blockPhase: {fileID: 11400000, guid: a4a72aba56aeaa647bea0104a11b21de, type: 2}

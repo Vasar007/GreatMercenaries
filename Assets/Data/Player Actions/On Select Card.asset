@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e4e395cfe4de04d98d8651bae58690, type: 3}
+  m_Name: On Select Card
+  m_EditorClassIdentifier: 
+  onCurrentCardSelected: {fileID: 11400000, guid: 49ce86ae0c4ba7a48afe2315d86e6e6b,
+    type: 2}
+  currentCard: {fileID: 11400000, guid: 6e3e27a46a641b249945502ac905ecdc, type: 2}
+  holdingState: {fileID: 11400000, guid: e4b4b242d00a158469ebee88b1c38e66, type: 2}

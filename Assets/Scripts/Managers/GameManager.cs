@@ -133,7 +133,10 @@ namespace GM
         public void LoadPlayerOnActive(PlayerHolder playerHolder)
         {
             var previousPlayer = playerOneHolder.playerHolder;
-            LoadPlayerOnHolder(previousPlayer, playerTwoHolder, statsUIs[1]);
+            if (previousPlayer != playerHolder)
+            {
+                LoadPlayerOnHolder(previousPlayer, playerTwoHolder, statsUIs[1]);
+            }
             LoadPlayerOnHolder(playerHolder, playerOneHolder, statsUIs[0]);
         }
 
@@ -163,7 +166,8 @@ namespace GM
             playerHolder.handCards.Add(cardInstance);
         }
 
-        public void AddBlockInstance(CardInstance cardAttacker, CardInstance cardBlocker)
+        public void AddBlockInstance(CardInstance cardAttacker, CardInstance cardBlocker,
+                                     ref int count)
         {
             var blockInstance = GetBlockInstanceOfAttacker(cardAttacker);
             if (blockInstance == null)
@@ -175,10 +179,12 @@ namespace GM
                 _blockInstances.Add(cardAttacker, blockInstance);
             }
 
-            if (blockInstance.cardBlockers.Contains(cardBlocker))
+            if (!blockInstance.cardBlockers.Contains(cardBlocker))
             {
                 blockInstance.cardBlockers.Add(cardBlocker);
             }
+
+            count = blockInstance.cardBlockers.Count;
         }
 
         public Dictionary<CardInstance, BlockInstance> GetBlockInstances()

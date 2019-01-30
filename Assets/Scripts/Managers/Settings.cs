@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace GM
 {
     // Class which contains settings and common methods.
-    public class Settings
+    public static class Settings
     {
         public static GameManager gameManager;
 
@@ -52,23 +52,35 @@ namespace GM
             gameManager.currentPlayer.DropCard(cardInstance);
         }
 
-        public static void SetParentForCard(Transform cardTransform, Transform parent)
+        public static void SetParentForCard(Transform cardTransform, Transform parent,
+                                            Vector3? localPosition = null,
+                                            Vector3? eulerAngles = null)
         {
             // Change parent object and correct transform of the card.
             cardTransform.SetParent(parent);
-            cardTransform.localPosition = Vector3.zero;
-            cardTransform.localEulerAngles = Vector3.zero;
+            cardTransform.localPosition = localPosition ?? Vector3.zero;
+            cardTransform.localEulerAngles = eulerAngles ?? Vector3.zero;
             cardTransform.localScale = Vector3.one;
+        }
+
+        public static void SetCardForBlock(Transform cardTransform, Transform parent, int count)
+        {
+            const int offset = 150; // Calculated offset from scene.
+
+            var blockPosition = Vector3.zero;
+            blockPosition.x += offset * count;
+            blockPosition.y -= offset * count;
+            SetParentForCard(cardTransform, parent, blockPosition);
         }
 
         public static void RegisterEvent(string eventName, Color? color = null)
         {
-            var choosenColor = color ?? Color.white;
             if (_consoleHook == null)
             {
                 _consoleHook = Resources.Load("Console Hook") as ConsoleHook;
             }
 
+            var choosenColor = color ?? Color.white;
             _consoleHook.RegisterEvent(eventName, choosenColor);
         }
     }

@@ -9,7 +9,9 @@ namespace GM.GameStates
     {
         public CardVariable currentCard;
         public State playerControlState;
+        public State playerBlockState;
         public SO.GameEvent onPlayerControlState;
+        public Phase blockPhase;
 
         public override void Execute(float deltaTime)
         {
@@ -19,21 +21,48 @@ namespace GM.GameStates
             {
                 var results = Settings.GetUIObjects();
 
-                foreach (var result in results)
+                var gameManager = Settings.gameManager;
+                if (gameManager.turns[gameManager.turnIndex].currentPhase.value != blockPhase)
                 {
-                    var areaLogic = result.gameObject.GetComponentInParent<Area>();
-                    if (areaLogic != null)
+                    foreach (var result in results)
                     {
-                        areaLogic.OnDrop();
-                        break;
+                        var areaLogic = result.gameObject.GetComponentInParent<Area>();
+                        if (areaLogic != null)
+                        {
+                            areaLogic.OnDrop();
+                            break;
+                        }
+                    }
+
+                    currentCard.value.gameObject.SetActive(true);
+                    currentCard.Set(null);
+
+                    gameManager.SetState(playerControlState);
+                    onPlayerControlState.Raise();
+                }
+                else
+                {
+                    foreach (var result in results)
+                    {
+                        var cardInstance = result.gameObject.GetComponentInParent<CardInstance>();
+                        if (cardInstance != null)
+                        {
+                            int count = 0;
+                            if (cardInstance.CanBeBlocked(currentCard.value, ref count))
+                            {
+                                Settings.SetCardForBlock(currentCard.value.transform,
+                                                         cardInstance.transform, count);
+                            }
+
+                            currentCard.value.gameObject.SetActive(true);
+                            currentCard.Set(null);
+
+                            gameManager.SetState(playerBlockState);
+                            onPlayerControlState.Raise();
+                            break;
+                        }
                     }
                 }
-
-                currentCard.value.gameObject.SetActive(true);
-                currentCard.Set(null);
-
-                Settings.gameManager.SetState(playerControlState);
-                onPlayerControlState.Raise();
                 return;
             }
         }

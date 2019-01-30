@@ -52,18 +52,18 @@ namespace GM
                 {
                     foreach (var cardBlocker in blockInstance.cardBlockers)
                     {
-                        var defenceAttackProperty = card.GetProperty(attackElement);
-                        if (defenceAttackProperty == null)
+                        var healthProperty = card.GetProperty(healthElement);
+                        if (healthProperty == null)
                         {
                             Debug.LogWarning("You are trying to block a card with no attack " +
                                              "element!");
                             continue;
                         }
 
-                        attackValue -= defenceAttackProperty.intValue;
-                        if (defenceAttackProperty.intValue <= attackValue)
+                        attackValue -= healthProperty.intValue;
+                        if (healthProperty.intValue <= attackValue)
                         {
-                            // Make a card duel.
+                            // We can change battle logic here.
                             cardBlocker.CardInstanceToGraveyard();
                         }
                     }
