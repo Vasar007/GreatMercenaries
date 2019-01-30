@@ -53,15 +53,14 @@ namespace GM.GameStates
                                 Settings.SetCardForBlock(currentCard.value.transform,
                                                          cardInstance.transform, count);
                             }
-
-                            currentCard.value.gameObject.SetActive(true);
-                            currentCard.Set(null);
-
-                            gameManager.SetState(playerBlockState);
-                            onPlayerControlState.Raise();
                             break;
                         }
                     }
+                    currentCard.value.gameObject.SetActive(true);
+                    currentCard.Set(null);
+
+                    gameManager.SetState(playerBlockState);
+                    onPlayerControlState.Raise();
                 }
                 return;
             }
