@@ -8,7 +8,7 @@ namespace GM
     public class BattleResolve : Phase
     {
         public Element attackElement;
-        public Element healthElement;
+        public Element defenceElement;
 
         private BlockInstance GetBlockInstanceOfAttacker(CardInstance cardAttacker,
             Dictionary<CardInstance, BlockInstance> blockInstances)
@@ -33,6 +33,7 @@ namespace GM
 
             var blockDictionary = Settings.gameManager.GetBlockInstances();
 
+            var diedCards = new List<CardInstance>();
             // If there are more than 2 players we should specify move order in attack.
             foreach (var cardAttacker in playerHolder.attackingCards)
             {
@@ -52,19 +53,26 @@ namespace GM
                 {
                     foreach (var cardBlocker in blockInstance.cardBlockers)
                     {
-                        var healthProperty = card.GetProperty(healthElement);
-                        if (healthProperty == null)
+                        var defenceProperty = card.GetProperty(defenceElement);
+                        if (defenceProperty == null)
                         {
-                            Debug.LogWarning("You are trying to block a card with no attack " +
+                            Debug.LogWarning("You are trying to block a card with no defence " +
                                              "element!");
                             continue;
                         }
 
-                        attackValue -= healthProperty.intValue;
-                        if (healthProperty.intValue <= attackValue)
+                        attackValue -= defenceProperty.intValue;
+                        if (attackValue >= 0)
                         {
                             // We can change battle logic here.
-                            cardBlocker.CardInstanceToGraveyard();
+                            diedCards.Add(cardBlocker);
+                            Debug.Log("Blocker died.");
+                            if (attackValue == 0) break;
+                        }
+                        else
+                        {
+                            // Attacking card died.
+                            break;
                         }
                     }
                 }
@@ -72,15 +80,21 @@ namespace GM
                 if (attackValue <= 0)
                 {
                     attackValue = 0;
-                    cardAttacker.CardInstanceToGraveyard();
+                    diedCards.Add(cardAttacker);
+                    Debug.Log("Attacker died.");
                 }
+                else
+                {
+                    playerHolder.DropCard(cardAttacker, false);
+                    playerHolder.currentHolder.SetCardDown(cardAttacker);
+                    cardAttacker.SetFlatfooted(true);
 
-                playerHolder.DropCard(cardAttacker, false);
-                playerHolder.currentHolder.SetCardDown(cardAttacker);
-                cardAttacker.SetFlatfooted(true);
-
-                enemyHolder.DoDamage(attackValue);
+                    enemyHolder.DoDamage(attackValue);
+                    Debug.Log(attackValue + " damage.");
+                }
             }
+
+            diedCards.ForEach(diedCard => diedCard.CardInstanceToGraveyard());
 
             Settings.gameManager.ClearBlockInstances();
             playerHolder.attackingCards.Clear();

@@ -44,6 +44,8 @@ namespace GM
         [System.NonSerialized]
         public List<ResourceHolder> resourcesList = new List<ResourceHolder>();
 
+        // TODO: add unique graveyard for every player.
+
         public int ResourcesCunt
         {
             get
@@ -108,8 +110,11 @@ namespace GM
                 handCards.Remove(cardInstance);
             }
 
-            cardsDown.Add(cardInstance);
-            
+            if (!cardsDown.Contains(cardInstance))
+            {
+                cardsDown.Add(cardInstance);
+            }
+
             if (registerEvent)
             {
                 Settings.RegisterEvent(username + " used " + cardInstance.cardViz.card.name +
@@ -154,6 +159,12 @@ namespace GM
 
         public void DoDamage(int value)
         {
+            if (value < 0)
+            {
+                Debug.LogError("Try to do negative damage!");
+                return;
+            }
+
             health -= value;
             if (statsUI != null)
             {
@@ -168,6 +179,20 @@ namespace GM
                 statsUI.playerHolder = this;
                 statsUI.UpdateAll();
             }
+        }
+
+        public void CardToGraveyard(CardInstance cardInstance)
+        {
+            if (handCards.Contains(cardInstance))
+            {
+                handCards.Remove(cardInstance);
+            }
+            if (cardsDown.Contains(cardInstance))
+            {
+                cardsDown.Remove(cardInstance);
+            }
+
+            // No need to remove from attackingCards because it's subset of cardsDown.
         }
     }
 }

@@ -42,7 +42,6 @@ namespace GM
         public static void DropCreatureCard(Transform cardTransform, Transform parent,
                                             CardInstance cardInstance)
         {
-            cardInstance.isFlatfooted = true;
             // Execute any special card abilities on drop.
 
             SetParentForCard(cardTransform, parent);
@@ -59,13 +58,14 @@ namespace GM
             // Change parent object and correct transform of the card.
             cardTransform.SetParent(parent);
             cardTransform.localPosition = localPosition ?? Vector3.zero;
+            cardTransform.localRotation = Quaternion.identity;
             cardTransform.localEulerAngles = eulerAngles ?? Vector3.zero;
             cardTransform.localScale = Vector3.one;
         }
 
         public static void SetCardForBlock(Transform cardTransform, Transform parent, int count)
         {
-            const int offset = 150; // Calculated offset from scene.
+            const int offset = 50; // Calculated offset from scene.
 
             var blockPosition = Vector3.zero;
             blockPosition.x += offset * count;

@@ -19,7 +19,7 @@ MonoBehaviour:
     intValue: 0
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 3181401d3c2087849b0737ef0e6ee5dd, type: 2}
-  - stringValue: Gain additional 2 health in battle with servant of Darkness
+  - stringValue: Gain additional 2 defence point in battle with servant of Darkness
     intValue: 0
     sprite: {fileID: 0}
     element: {fileID: 11400000, guid: 109ea4047ba6a77479c7934ced3421b6, type: 2}

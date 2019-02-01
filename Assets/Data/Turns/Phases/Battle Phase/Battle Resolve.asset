@@ -15,4 +15,4 @@ MonoBehaviour:
   phaseName: Resolve
   forceExit: 0
   attackElement: {fileID: 11400000, guid: 270e990828d28a249ac3fd6bb39e0735, type: 2}
-  healthElement: {fileID: 11400000, guid: 1791e30d609062642b6b3f72e64ac28e, type: 2}
+  defenceElement: {fileID: 11400000, guid: 1791e30d609062642b6b3f72e64ac28e, type: 2}

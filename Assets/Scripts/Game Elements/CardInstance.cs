@@ -10,6 +10,9 @@ namespace GM
         public GameElements.GameElementLogic currentLogic;
         public bool isFlatfooted;
 
+        [System.NonSerialized]
+        public bool wasUsed; // Need to additional check during block phase.
+
         private void Start()
         {
             cardViz = GetComponent<CardViz>();
@@ -31,23 +34,28 @@ namespace GM
 
         public bool CanAttack()
         {
-            bool result = true;
             if (isFlatfooted)
             {
-                result = false;
+                return false;
             }
 
             if (cardViz.card.cardType.TypeAllowsForAttack(this))
             {
-                result = true;
+                return true;
             }
 
-            return result;
+            return false;
         }
 
         public void SetFlatfooted(bool isFlatfooted)
         {
+            if (this.isFlatfooted && transform.localEulerAngles == Vector3.zero)
+            {
+                Debug.LogWarning("Something wrong with flatfooted cards!");
+            }
+
             this.isFlatfooted = isFlatfooted;
+            wasUsed = isFlatfooted;
             if (isFlatfooted)
             {
                 transform.localEulerAngles = new Vector3(0, 0, 90);
@@ -61,7 +69,7 @@ namespace GM
         public bool CanBeBlocked(CardInstance cardBlocker, ref int count)
         {
             bool result = playerOwner.attackingCards.Contains(this);
-            if (result && cardViz.card.cardType.canAttack)
+            if (result && cardBlocker.CanAttack())
             {
                 result = true;
 
@@ -81,7 +89,7 @@ namespace GM
 
         public void CardInstanceToGraveyard()
         {
-            Debug.Log("Card to graveyard.");
+            Settings.gameManager.PutCardToGraveyard(this);
         }
     }
 }

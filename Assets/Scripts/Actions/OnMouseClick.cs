@@ -11,7 +11,6 @@ namespace GM.GameStates
             if (Input.GetMouseButtonDown(0))
             {
                 var results = Settings.GetUIObjects();
-
                 foreach (var result in results)
                 {
                     var clickable = result.gameObject.GetComponentInParent<IClickable>();

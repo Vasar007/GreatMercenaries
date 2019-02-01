@@ -13,56 +13,52 @@ namespace GM.GameStates
         public SO.GameEvent onPlayerControlState;
         public Phase blockPhase;
 
+        private void ResetActiveCard(State state)
+        {
+            currentCard.value.gameObject.SetActive(true);
+            currentCard.Set(null);
+
+            Settings.gameManager.SetState(state);
+            onPlayerControlState.Raise();
+        }
+
         public override void Execute(float deltaTime)
         {
-            bool mouseIsDown = Input.GetMouseButton(0);
+            if (Input.GetMouseButton(0)) return;
 
-            if (!mouseIsDown)
+            var results = Settings.GetUIObjects();
+
+            var gameManager = Settings.gameManager;
+            if (gameManager.turns[gameManager.turnIndex].currentPhase.value != blockPhase)
             {
-                var results = Settings.GetUIObjects();
-
-                var gameManager = Settings.gameManager;
-                if (gameManager.turns[gameManager.turnIndex].currentPhase.value != blockPhase)
+                foreach (var result in results)
                 {
-                    foreach (var result in results)
+                    var areaLogic = result.gameObject.GetComponentInParent<Area>();
+                    if (areaLogic != null)
                     {
-                        var areaLogic = result.gameObject.GetComponentInParent<Area>();
-                        if (areaLogic != null)
-                        {
-                            areaLogic.OnDrop();
-                            break;
-                        }
+                        areaLogic.OnDrop();
+                        break;
                     }
-
-                    currentCard.value.gameObject.SetActive(true);
-                    currentCard.Set(null);
-
-                    gameManager.SetState(playerControlState);
-                    onPlayerControlState.Raise();
                 }
-                else
+                ResetActiveCard(playerControlState);
+            }
+            else
+            {
+                foreach (var result in results)
                 {
-                    foreach (var result in results)
+                    var cardInstance = result.gameObject.GetComponentInParent<CardInstance>();
+                    if (cardInstance != null)
                     {
-                        var cardInstance = result.gameObject.GetComponentInParent<CardInstance>();
-                        if (cardInstance != null)
+                        int count = 0;
+                        if (cardInstance.CanBeBlocked(currentCard.value, ref count))
                         {
-                            int count = 0;
-                            if (cardInstance.CanBeBlocked(currentCard.value, ref count))
-                            {
-                                Settings.SetCardForBlock(currentCard.value.transform,
-                                                         cardInstance.transform, count);
-                            }
-                            break;
+                            Settings.SetCardForBlock(currentCard.value.transform,
+                                                     cardInstance.transform, count);
                         }
+                        break;
                     }
-                    currentCard.value.gameObject.SetActive(true);
-                    currentCard.Set(null);
-
-                    gameManager.SetState(playerBlockState);
-                    onPlayerControlState.Raise();
                 }
-                return;
+                ResetActiveCard(playerBlockState);
             }
         }
     }

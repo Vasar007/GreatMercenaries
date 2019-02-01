@@ -8,22 +8,20 @@ namespace GM
     {
         public override void Execute(float deltaTime)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!Input.GetMouseButtonDown(0)) return;
+
+            var results = Settings.GetUIObjects();
+            foreach (var result in results)
             {
-                var results = Settings.GetUIObjects();
+                var cardInstance = result.gameObject.GetComponentInParent<CardInstance>();
+                var playerHolder = Settings.gameManager.currentPlayer;
 
-                foreach (var result in results)
+                if (!playerHolder.cardsDown.Contains(cardInstance)) return;
+
+                if (cardInstance.CanAttack())
                 {
-                    var cardInstance = result.gameObject.GetComponentInParent<CardInstance>();
-                    var playerHolder = Settings.gameManager.currentPlayer;
-
-                    if (!playerHolder.cardsDown.Contains(cardInstance)) return;
-
-                    if (cardInstance.CanAttack())
-                    {
-                        playerHolder.attackingCards.Add(cardInstance);
-                        playerHolder.currentHolder.SetCardOnBattleLine(cardInstance);
-                    }
+                    playerHolder.attackingCards.Add(cardInstance);
+                    playerHolder.currentHolder.SetCardOnBattleLine(cardInstance);
                 }
             }
         }

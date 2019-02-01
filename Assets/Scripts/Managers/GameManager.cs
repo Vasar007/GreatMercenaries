@@ -12,8 +12,8 @@ namespace GM
         public PlayerHolder[] allPlayers;
 
         public PlayerHolder currentPlayer;
-        public CardHolder playerOneHolder;
-        public CardHolder playerTwoHolder;
+        public CardHolder playerOneCardHolder;
+        public CardHolder playerTwoCardHolder;
 
         public State currentState;
         public GameObject cardPrefab;
@@ -25,6 +25,10 @@ namespace GM
         public SO.StringVariable turnText;
 
         public PlayerStatsUI[] statsUIs;
+
+        public SO.TransformVariable graveyardVariable;
+
+        private List<CardInstance> _graveyardCards = new List<CardInstance>();
 
         private Dictionary<CardInstance, BlockInstance> _blockInstances =
             new Dictionary<CardInstance, BlockInstance>();
@@ -88,11 +92,11 @@ namespace GM
                 // If we have more than 2 players, need to rework this statement.
                 if (i == 0)
                 {
-                    allPlayers[i].currentHolder = playerOneHolder;
+                    allPlayers[i].currentHolder = playerOneCardHolder;
                 }
                 else
                 {
-                    allPlayers[i].currentHolder = playerTwoHolder;
+                    allPlayers[i].currentHolder = playerTwoCardHolder;
                 }
                 allPlayers[i].statsUI = statsUIs[i];
                 allPlayers[i].currentHolder.LoadPlayer(allPlayers[i], allPlayers[i].statsUI);
@@ -132,12 +136,12 @@ namespace GM
 
         public void LoadPlayerOnActive(PlayerHolder playerHolder)
         {
-            var previousPlayer = playerOneHolder.playerHolder;
+            var previousPlayer = playerOneCardHolder.playerHolder;
             if (previousPlayer != playerHolder)
             {
-                LoadPlayerOnHolder(previousPlayer, playerTwoHolder, statsUIs[1]);
+                LoadPlayerOnHolder(previousPlayer, playerTwoCardHolder, statsUIs[1]);
             }
-            LoadPlayerOnHolder(playerHolder, playerOneHolder, statsUIs[0]);
+            LoadPlayerOnHolder(playerHolder, playerOneCardHolder, statsUIs[0]);
         }
 
         public void PickNewCardFromDeck(PlayerHolder playerHolder)
@@ -182,6 +186,7 @@ namespace GM
             if (!blockInstance.cardBlockers.Contains(cardBlocker))
             {
                 blockInstance.cardBlockers.Add(cardBlocker);
+                cardBlocker.wasUsed = true;
             }
 
             count = blockInstance.cardBlockers.Count;
@@ -195,6 +200,21 @@ namespace GM
         public void ClearBlockInstances()
         {
             _blockInstances.Clear();
+        }
+
+        public void PutCardToGraveyard(CardInstance cardInstance)
+        {
+            Debug.Log("Called put to graveyard method.");
+            cardInstance.playerOwner.CardToGraveyard(cardInstance);
+
+            _graveyardCards.Add(cardInstance);
+
+            const int offset = 5;
+            var position = Vector3.zero;
+            position.x -= _graveyardCards.Count * offset;
+            position.z = _graveyardCards.Count * offset;
+
+            Settings.SetParentForCard(cardInstance.transform, graveyardVariable.value, position);
         }
     }
 }

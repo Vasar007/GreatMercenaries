@@ -21,18 +21,25 @@ namespace GM
             this.playerHolder = playerHolder;
             playerHolder.currentHolder = this;
 
-            playerHolder.cardsDown.ForEach(cardInstance =>
-                Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
-                                          downGrid.value.transform));
+            foreach (var cardInstance in playerHolder.cardsDown)
+            {
+                if (!playerHolder.attackingCards.Contains(cardInstance))
+                {
+                    var cardTransform = cardInstance.cardViz.gameObject.transform;
+                    Settings.SetParentForCard(cardTransform, downGrid.value.transform,
+                                              cardTransform.localPosition,
+                                              cardTransform.localEulerAngles);
+                }
+            }
 
-            playerHolder.handCards.ForEach(cardInstance =>
+            foreach (var cardInstance in playerHolder.handCards)
             {
                 if (cardInstance.cardViz != null)
                 {
                     Settings.SetParentForCard(cardInstance.cardViz.gameObject.transform,
                                               handGrid.value.transform);
                 }
-            });
+            }
 
             playerHolder.resourcesList.ForEach(resourceHolder =>
                 Settings.SetParentForCard(resourceHolder.cardObject.transform,

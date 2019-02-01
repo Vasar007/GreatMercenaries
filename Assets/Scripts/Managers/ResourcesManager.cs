@@ -9,21 +9,22 @@ namespace GM
     {
         public Element typeElement;
         public Card[] allCards;
-        Dictionary<string, Card> cardsDict = new Dictionary<string, Card>();
+
+        private Dictionary<string, Card> _cardsDict = new Dictionary<string, Card>();
 
         private Card GetCard(string id)
         {
             Card result = null;
-            cardsDict.TryGetValue(id, out result);
+            _cardsDict.TryGetValue(id, out result);
             return result;
         }
 
         public void Init()
         {
-            cardsDict.Clear();
+            _cardsDict.Clear();
             foreach (var card in allCards)
             {
-                cardsDict.Add(card.name, card);
+                _cardsDict.Add(card.name, card);
             }
         }
 

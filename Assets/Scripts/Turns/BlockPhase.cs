@@ -35,9 +35,9 @@ namespace GM
                     return;
                 }
 
-                if (gameManager.playerTwoHolder.playerHolder.isHumanPlayer)
+                if (gameManager.playerTwoCardHolder.playerHolder.isHumanPlayer)
                 {
-                    gameManager.LoadPlayerOnActive(gameManager.playerTwoHolder.playerHolder);
+                    gameManager.LoadPlayerOnActive(gameManager.playerTwoCardHolder.playerHolder);
                 }
             }
         }
