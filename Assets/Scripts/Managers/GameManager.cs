@@ -124,8 +124,7 @@ namespace GM
 
         public PlayerHolder GetEnemyOf(PlayerHolder playerHolder)
         {
-            var index = Array.FindIndex(allPlayers, player => player != playerHolder);
-            return index != -1 ? allPlayers[index] : null;
+            return Array.Find(allPlayers, player => player != playerHolder);
         }
 
         public void LoadPlayerOnHolder(PlayerHolder playerHolder, CardHolder cardHolder,

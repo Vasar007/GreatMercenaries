@@ -17,6 +17,7 @@ namespace GM
             if (card_ == null) return;
 
             // Save initial data.
+            card_.cardViz = this;
             card = card_;
             card.cardType.OnSetType(this);
 
@@ -70,8 +71,7 @@ namespace GM
         public CardVizProperties GetProperties(Element element)
         {
             // Find first property with equal element and return it.
-            var result = properties.First(property => property.element == element);
-            return result;
+            return properties.First(property => property.element == element);
         }
     }
 }

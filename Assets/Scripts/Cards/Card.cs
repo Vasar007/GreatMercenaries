@@ -7,14 +7,18 @@ namespace GM
     [CreateAssetMenu(menuName = "Card")]
     public class Card : ScriptableObject
     {
+        [System.NonSerialized]
+        public int instanceId;
+        [System.NonSerialized]
+        public CardViz cardViz;
+
         public CardType cardType;
         public int cardCost;
         public CardProperties[] properties;
 
         public CardProperties GetProperty(Element element)
         {
-            var index = Array.FindIndex(properties, property => property.element == element);
-            return index != -1 ? properties[index] : null;
+            return Array.Find(properties, property => property.element == element);
         }
     }
 }
