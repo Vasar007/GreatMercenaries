@@ -24,7 +24,7 @@ namespace GM.GameStates
                     var gameManager = Settings.gameManager;
                     var enemyHolder = gameManager.GetEnemyOf(gameManager.currentPlayer);
 
-                    // TODO: must be modify when add spells.
+                    // TODO: need to modify when spells will be added.
                     if (!cardInstance.CanAttack() ||
                         !enemyHolder.cardsDown.Contains(cardInstance) ||
                         cardInstance.wasUsed) continue;
