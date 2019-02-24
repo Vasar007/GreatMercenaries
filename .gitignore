@@ -34,3 +34,10 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# User defined block
+Assets/_TerrainAutoUpgrade/
+Assets/Photon Unity Networking/
+Assets/PhotonChatApi
+Assets/Plugins
+*.meta
