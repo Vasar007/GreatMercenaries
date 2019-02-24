@@ -8,6 +8,8 @@ namespace GM
     // Class for control of game states.
     public class GameManager : MonoBehaviour
     {
+        public static GameManager singleton;
+
         [System.NonSerialized]
         public PlayerHolder[] allPlayers;
 
@@ -32,8 +34,6 @@ namespace GM
 
         private Dictionary<CardInstance, BlockInstance> _blockInstances =
             new Dictionary<CardInstance, BlockInstance>();
-
-        public static GameManager singleton;
 
         private void Awake()
         {
