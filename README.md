@@ -1,2 +1,3 @@
 # GreatMercenaries
-Crollection card game based on CCG framework by Sharp Accent.
+
+Collection card game based on CCG framework by Sharp Accent.
